@@ -35,6 +35,15 @@ let posts = [
 
 
 // ===============================
+// HOME PAGE
+// ===============================
+
+app.get("/", (req, res) => {
+    res.redirect("/posts");
+});
+
+
+// ===============================
 // SHOW ALL POSTS
 // ===============================
 
@@ -57,7 +66,6 @@ app.get("/posts/new", (req, res) => {
 // ===============================
 
 app.post("/posts", (req, res) => {
-
     let { username, content } = req.body;
 
     let id = Date.now().toString();
@@ -68,7 +76,7 @@ app.post("/posts", (req, res) => {
         content
     });
 
-    // Go back to main page
+    // Redirect to main page
     res.redirect("/posts");
 });
 
@@ -78,7 +86,6 @@ app.post("/posts", (req, res) => {
 // ===============================
 
 app.get("/posts/:id/edit", (req, res) => {
-
     let { id } = req.params;
 
     let post = posts.find((p) => p.id === id);
@@ -96,7 +103,6 @@ app.get("/posts/:id/edit", (req, res) => {
 // ===============================
 
 app.post("/posts/:id/edit", (req, res) => {
-
     let { id } = req.params;
 
     let post = posts.find((p) => p.id === id);
@@ -110,7 +116,7 @@ app.post("/posts/:id/edit", (req, res) => {
     post.username = username;
     post.content = content;
 
-    // Go back to main page
+    // Redirect to main page
     res.redirect("/posts");
 });
 
@@ -120,12 +126,11 @@ app.post("/posts/:id/edit", (req, res) => {
 // ===============================
 
 app.post("/posts/:id/delete", (req, res) => {
-
     let { id } = req.params;
 
     posts = posts.filter((p) => p.id !== id);
 
-    // Go back to main page
+    // Redirect to main page
     res.redirect("/posts");
 });
 
